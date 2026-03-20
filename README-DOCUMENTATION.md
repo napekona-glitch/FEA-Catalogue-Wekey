@@ -42,14 +42,24 @@ Catalogue interactif de services Architecture & Transformation permettant aux cl
 
 ### Architecture des composants
 ```
-├── index.html              # Page principale avec catalogue complet
-├── [15 fiches services].html # Fiches détaillées individuelles
+├── index.html                     # Page principale avec catalogue complet
+├── fiche-[service].html           # 15 fiches détaillées individuelles
+├── pdf-[service].html            # Versions PDF des fiches
+├── storyline.html                 # Page storyline
+├── test-pdf.html                  # Page test PDF
 ├── CSS/
-│   ├── catalog-style.css   # Styles page principale
-│   └── service-detail.css  # Styles fiches détaillées
-└── Assets/
-    ├── PNG/                # Images et illustrations
-    └── Monolithe.png       # Schémas techniques
+│   ├── catalog-style.css         # Styles page principale
+│   └── service-detail.css        # Styles fiches détaillées
+├── JS/
+│   ├── catalog-script.js         # Logique catalogue et chatbot
+│   ├── chatbot-responses.js      # Réponses chatbot
+│   ├── fiche-script.js           # Logique fiches détaillées
+│   └── html-to-docx.js           # Export DOCX
+├── Assets/
+│   ├── PNG/                      # Images et illustrations
+│   └── Monolithe.png             # Schémas techniques
+├── groq-config.js                # Configuration API Groq
+└── deploy_word_button*.py       # Scripts déploiement
 ```
 
 ---
@@ -58,16 +68,22 @@ Catalogue interactif de services Architecture & Transformation permettant aux cl
 
 ### Pages principales
 - **`index.html`** : Page d'accueil avec catalogue complet et chatbot global
-- **`FEA-catalogue_services.html`** : Vue alternative du catalogue
-- **15 fiches de service** : Pages détaillées pour chaque offre
+- **`storyline.html`** : Page narrative du parcours client
+- **`test-pdf.html`** : Page de test pour fonctionnalités PDF
+- **15 fiches de service** : Pages détaillées pour chaque offre (fiche-*.html)
+- **15 versions PDF** : Export PDF des fiches (pdf-*.html)
 
 ### Fichiers de configuration
 - **`groq-config.js`** : Configuration pour l'API Groq
-- **`update-styles.ps1`** et **`update_links.ps1`** : Scripts de maintenance
+- **`CNAME`** : Configuration domaine personnalisé
+
+### Scripts utilitaires
+- **`deploy_word_button.py`** et **`deploy_word_button_v2.py`** : Scripts de déploiement
 
 ### Documentation
 - **`README-GROQ.md`** : Documentation spécifique à l'intégration Groq
 - **`README-DOCUMENTATION.md`** : Cette documentation complète
+- **`STORYLINE.md`** : Documentation du parcours client
 
 ---
 
@@ -86,7 +102,7 @@ Chaque fiche de service contient :
 - **Approche méthodologique** : Éapes et livrables
 - **Profils mobilisés** : Expertises requises
 - **Durée typique** : Estimation de temps
-- **Chatbot spécialisé** : Assistant focus sur le service spécifique
+- **Export PDF/DOCX** : Fonctionnalités de téléchargement
 
 ### 3. Chatbot intelligent
 - **Deux niveaux d'assistance** :
@@ -124,7 +140,10 @@ Chaque fiche de service contient :
 
 ### Configuration Groq
 - **API Endpoint** : `https://api.groq.com/openai/v1/chat/completions`
-- **Modèle** : `llama-3.1-8b-instant` (gratuit)
+- **Modèles disponibles** : 
+  - `llama-3.1-8b-instant` (gratuit, rapide)
+  - `mixtral-8x7b-32768` (excellent pour le français)
+  - `gemma-7b-it` (léger et rapide)
 - **Authentification** : Bearer token
 - **Paramètres** : Temperature 0.7, Max tokens 500
 
@@ -222,8 +241,7 @@ destination: _site
 ## 🔧 Maintenance et Évolution
 
 ### Scripts de maintenance
-- **`update-styles.ps1`** : Mise à jour des styles CSS
-- **`update_links.ps1`** : Mise à jour des liens entre pages
+Les scripts de maintenance peuvent être ajoutés selon les besoins pour automatiser les tâches récurrentes.
 
 ### Monitoring et logs
 - **Console browser** : Logs erreurs Groq et performances
@@ -287,6 +305,7 @@ destination: _site
 
 ### Documentation associée
 - **`README-GROQ.md`** : Guide intégration API Groq
+- **`STORYLINE.md`** : Documentation parcours client
 - **Code comments** : Documentation inline dans JavaScript
 - **CSS comments** : Explication des styles et composants
 

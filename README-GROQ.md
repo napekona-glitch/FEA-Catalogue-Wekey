@@ -9,14 +9,14 @@
    - Copiez votre clé API (commence par `gsk_`)
 
 2. **Configurer la clé API**
-   - Ouvrez le fichier `index.html`
-   - Remplacez `gsk_YOUR_GROQ_API_KEY_HERE` par votre vraie clé API à la ligne 764
-   - OU utilisez le fichier `groq-config.js` pour une configuration centralisée
+   - Ouvrez le fichier `groq-config.js`
+   - Remplacez `gsk_YOUR_GROQ_API_KEY_HERE` par votre vraie clé API à la ligne 7
+   - OU configurez directement dans les fichiers HTML si nécessaire
 
 ## Modèles disponibles
 
-- **mixtral-8x7b-32768**: Meilleur pour le français, très performant
-- **llama2-70b-4096**: Excellent modèle général
+- **llama-3.1-8b-instant**: Modèle gratuit, rapide et performant
+- **mixtral-8x7b-32768**: Excellent pour le français, très performant
 - **gemma-7b-it**: Plus rapide et léger
 
 ## Fonctionnalités
@@ -67,15 +67,17 @@
 ## Architecture
 
 ```
-User Input → Frontend → Groq API → LLM Response → Frontend → User
-     ↓ (fallback)              ↑ (si erreur)
+User Input → Frontend → groq-config.js → Groq API → LLM Response → Frontend → User
+     ↓ (fallback)                        ↑ (si erreur)
 Keyword Matching → Basic Response
 ```
 
 ## Prochaines améliorations
 
-- [ ] Backend proxy pour la production
-- [ ] Cache des réponses fréquentes
-- [ ] Analytics des questions utilisateurs
+- [ ] Backend proxy pour la production (sécurité renforcée)
+- [ ] Cache des réponses fréquentes (performance)
+- [ ] Analytics des questions utilisateurs (métriques)
 - [ ] Support multimodal (images, documents)
-- [ ] Intégration voix synthétisée
+- [ ] Intégration voix synthétisée (accessibilité)
+- [ ] Modèles de langage supplémentaires (choix utilisateur)
+- [ ] Système de feedback sur réponses (amélioration continue)
